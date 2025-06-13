@@ -1,9 +1,7 @@
 import 'package:demo_example/core/errors/app_exception.dart';
 import 'package:demo_example/core/errors/app_failure.dart';
-import 'package:demo_example/data/repositories/bus_repository.dart';
 import 'package:demo_example/domain/entities/bus_route_entities.dart';
 import 'package:demo_example/domain/repositories/bus_repository.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract class BusEvent {}
 
@@ -31,7 +29,3 @@ class SearchBusRoutes extends BusEvent {
 
   SearchBusRoutes(this.query);
 }
-
-final getAllBusRoutesProvider = Provider<Future<List<BusRoute>>>(
-  (ref) => GetAllBusRoutes(ref.watch(busRepositoryProvider)).call(),
-);

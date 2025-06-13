@@ -4,15 +4,10 @@ import 'package:dartx/dartx.dart';
 import 'package:demo_example/core/errors/app_exception.dart';
 import 'package:demo_example/core/services/logging/logger_serivce.dart';
 import 'package:dio/dio.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 enum GetArgsType { noArgs, path, paramsWithStart, paramsSeparatorOnly }
 
 typedef JsonData = Map<String, dynamic>;
-
-final httpClientProvider = Provider<HttpClient>(
-  (ref) => DioClient(ref.watch(loggerServiceProvider)),
-);
 
 abstract class HttpClient {
   Future<JsonData> get(
@@ -148,8 +143,7 @@ class _GetConverter {
     for (var i = 0; i < args.length; i++) {
       // if (args.entries.indexed.first.$1 != args.length - 1) {
       if (i != args.length - 1) {
-        final arg =
-            args.entries.whereIndexed((element, index) => index == i).first;
+        final arg = args.entries.where((element) => element == i).first;
         params += '${arg.key}=${arg.value}&';
       } else {
         final arg =

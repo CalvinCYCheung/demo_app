@@ -1,8 +1,6 @@
 import 'package:demo_example/core/errors/app_failure.dart';
-import 'package:demo_example/data/repositories/mtr_repository.dart';
 import 'package:demo_example/domain/entities/mtr_line_data_entities.dart';
 import 'package:demo_example/domain/repositories/mtr_repository.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract class MTREvent {}
 
@@ -45,7 +43,3 @@ class GetAllMTRRoutes extends MTREvent {
     }
   }
 }
-
-final getAllMTRRoutesProvider = Provider<Future<List<MTRLineDataEntity>>>(
-  (ref) => GetAllMTRRoutes(ref.watch(mtrRepositoryProvider)).call(),
-);

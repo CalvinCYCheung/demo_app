@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract class AppTheme {
   ThemeData get dark;
@@ -142,5 +141,3 @@ class ThemeCubit extends Cubit<ThemeMode> {
     emit(state == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark);
   }
 }
-
-final themeModeProvider = StateProvider<ThemeMode>((ref) => ThemeMode.dark);

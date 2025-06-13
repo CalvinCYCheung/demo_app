@@ -1,4 +1,3 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
 
 /// Logger init with await method
@@ -10,10 +9,6 @@ Future<void> loggerInit() async {
 late final Logger logger;
 
 // final logger = Logger(printer: PrettyPrinter());
-
-final loggerServiceProvider = Provider<LoggerService>(
-  (ref) => LoggerServiceImpl(),
-);
 
 abstract class LoggerService {
   void debug(String message, {StackTrace? stackTrace});

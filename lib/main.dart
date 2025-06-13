@@ -2,27 +2,19 @@ import 'package:demo_example/core/navigation/router.dart';
 import 'package:demo_example/core/services/dependencies_injector/dependenies_injector.dart';
 import 'package:demo_example/core/services/logging/logger_serivce.dart';
 import 'package:demo_example/core/theme/app_theme.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() async {
-  EquatableConfig.stringify = true;
   usePathUrlStrategy();
-  const stateEnv = String.fromEnvironment('STATE_ENV');
   await loggerInit();
-  if (stateEnv == '0') {
-    runApp(
-      MultiBlocProvider(
-        providers: [BlocProvider(create: (context) => ThemeCubit())],
-        child: BlocApp(),
-      ),
-    );
-  } else {
-    runApp(ProviderScope(child: RiverpodApp()));
-  }
+  runApp(
+    MultiBlocProvider(
+      providers: [BlocProvider(create: (context) => ThemeCubit())],
+      child: BlocApp(),
+    ),
+  );
 }
 
 class BlocApp extends StatelessWidget {
@@ -44,24 +36,6 @@ class BlocApp extends StatelessWidget {
           themeMode: context.watch<ThemeCubit>().state,
         );
       },
-    );
-  }
-}
-
-class RiverpodApp extends ConsumerWidget {
-  RiverpodApp({super.key});
-
-  final router = RiverpodAppRouter();
-  final theme = MainTheme();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return MaterialApp.router(
-      title: 'Riverpod Demo',
-      routerConfig: router.router,
-      theme: theme.light,
-      darkTheme: theme.dark,
-      themeMode: ref.watch(themeModeProvider),
     );
   }
 }

@@ -4,7 +4,6 @@ import 'package:demo_example/core/errors/app_exception.dart';
 import 'package:demo_example/core/services/logging/logger_serivce.dart';
 import 'package:demo_example/data/models/mtr_line_model.dart';
 import 'package:flutter/services.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract class MTRLocalDatasource {
   Future<List<MTRLineModel>> getMTRRoutes();
@@ -28,7 +27,3 @@ class MTRLocalDatasourceImpl implements MTRLocalDatasource {
     }
   }
 }
-
-final mtrLocalDatasourceProvider = Provider<MTRLocalDatasource>(
-  (ref) => MTRLocalDatasourceImpl(ref.watch(loggerServiceProvider)),
-);

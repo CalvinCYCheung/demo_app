@@ -1,7 +1,6 @@
 import 'package:demo_example/core/constants/bus_organization.dart';
 import 'package:demo_example/core/services/http/http_client.dart';
 import 'package:demo_example/data/models/freezed/route_model.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract class BusRemoteDatasource {
   Future<List<BusRouteModel>> getBusRoutes();
@@ -78,7 +77,3 @@ class BusRemoteDatasourceImpl implements BusRemoteDatasource {
     throw UnimplementedError();
   }
 }
-
-final busRemoteDatasourceProvider = Provider<BusRemoteDatasource>(
-  (ref) => BusRemoteDatasourceImpl(ref.watch(httpClientProvider)),
-);
